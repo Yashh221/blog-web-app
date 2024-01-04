@@ -8,9 +8,9 @@ export default function Home() {
     <div className=''>
       <Featured/>
       <CategoryList/>
-      <div>
-        <Menu/>
+      <div className='flex flex-row'>
       <CardList/>
+        <Menu/>
       </div>
     </div>
   )
