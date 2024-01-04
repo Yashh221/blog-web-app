@@ -12,7 +12,7 @@ type Props = {}
 
 const Navbar = (props: Props) => {
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
-    const {theme} = React.useContext(ThemeContext)
+    const { theme } = React.useContext(ThemeContext)
     const [selectedTab, setSelectedTab] = React.useState(() => {
         if (typeof window !== 'undefined') {
           return localStorage.getItem('headerTab') || 'home';
@@ -22,7 +22,7 @@ const Navbar = (props: Props) => {
   
     const handleTab = (tab : string) =>{
       setSelectedTab(tab)
-      localStorage.setItem("headerTab",tab)
+      localStorage.setItem("headerTab",tab);
     }
   
     const toggleSidebar = () => {
@@ -34,14 +34,14 @@ const Navbar = (props: Props) => {
       setSelectedTab(localStorage.getItem("headerTab") || "home")
     },[selectedTab])
   return (
-    <div className='w-full flex flex-row justify-between h-[120px] items-center'> 
+    <div className='w-full flex flex-row justify-between h-[120px] items-center px-12'> 
     <div className='w-full hidden lg:flex flex-row gap-x-3 flex-1'>
         <Image src={facebook} alt="faceboook" className='w-[35px] h-[35px] mt-2'/>
         <Image src={google} alt="google" className='w-[45px] h-[50px] mt-1'/>
         <Image src={instagram} alt="instagram" className='w-[40px] h-[40px] mt-2'/>
         <Image src={x} alt="x" className='w-[30px] h-[30px] mt-3'/>
     </div>  
-    <div className='font-bold md:flex-1 text-2xl flex justify-center items-center'>
+    <div className='font-bold md:flex-1 text-2xl flex md:justify-center justify-start items-center'>
         boogieblogs
     </div>
     <div className='flex-row hidden md:flex gap-x-8 flex-1 justify-end'>
@@ -60,7 +60,7 @@ const Navbar = (props: Props) => {
         </Link>
     </div>
     <button
-        className="lg:hidden hover:text-blue-200 fixed right-3"
+        className="md:hidden hover:text-blue-200 fixed right-3"
         onClick={toggleSidebar}
       >
         <Hamburger

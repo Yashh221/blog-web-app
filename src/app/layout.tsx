@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <ThemeContextProvider>
           <ThemeProvider>
-          <div className='max-w-full m-auto px-8'>
+          <div className='max-w-full'>
             <Navbar/>
             {children}
             <Footer/>
