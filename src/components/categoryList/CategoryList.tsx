@@ -15,7 +15,7 @@ const CategoryList = (props: Props) => {
           <div
             key={index}
             style={{ backgroundColor: category.color }}
-            className={`max-w-[150px] w-full rounded-xl py-3 gap-x-3 flex flex-row justify-center items-center`}
+            className={`max-w-[150px] w-full rounded-xl py-3 gap-x-3 flex flex-row justify-center items-center cursor-pointer`}
             onClick={() => {
               router.push(`blogs?category=${category.name}`);
             }}
