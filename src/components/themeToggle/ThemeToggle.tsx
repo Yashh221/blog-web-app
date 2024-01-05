@@ -14,7 +14,6 @@ const ThemeToggle = (props: Props) => {
     const handleClick = () => {
       setDarkMode(!isDarkMode);
       toggle();
-      document.body.classList.toggle('dark');
     };
   return (
     <div>

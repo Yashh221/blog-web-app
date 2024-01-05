@@ -24,6 +24,9 @@ const config: Config = {
         darkText: "#ddd",
         softBlack: "#626262",
       },
+      flex: {
+        "25": "0 0 25%",
+      },
     },
   },
   plugins: [],

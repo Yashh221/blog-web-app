@@ -1,24 +1,28 @@
 // "use client"
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Navbar from '@/components/navbar/Navbar'
-import Footer from '@/components/footer/Footer'
-import { ThemeContext, ThemeContextProvider, useTheme } from '@/contexts/ThemeContext'
-import { ThemeProvider } from '@/providers/ThemeProvider'
-import React from 'react'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
+import {
+  ThemeContext,
+  ThemeContextProvider,
+  useTheme,
+} from "@/contexts/ThemeContext";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import React from "react";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'BoogieBlogs',
-  description: 'Write your own story',
-}
+  title: "BoogieBlogs",
+  description: "Write your own story",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   // const theme = useTheme();
   return (
@@ -26,14 +30,14 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <ThemeContextProvider>
           <ThemeProvider>
-          <div className='max-w-full'>
-            <Navbar/>
-            {children}
-            <Footer/>
-          </div>
-        </ThemeProvider>
+            <div className="max-w-full">
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
+          </ThemeProvider>
         </ThemeContextProvider>
       </body>
     </html>
-  )
+  );
 }
