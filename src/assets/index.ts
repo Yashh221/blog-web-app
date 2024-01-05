@@ -5,6 +5,7 @@ export { default as x } from "./x.png";
 export { default as sun } from "./sun.png";
 export { default as moon } from "./moon.png";
 export { default as image1 } from "./image1.jpg";
+export { default as image } from "./image.png";
 export { default as coding } from "./coding.png";
 export { default as culture } from "./culture.png";
 export { default as external } from "./external.png";
