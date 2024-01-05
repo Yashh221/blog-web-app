@@ -5,7 +5,7 @@ import Menu from '@/components/menu/Menu'
 
 export default function Home() {
   return (
-    <div className=''>
+    <div className='h-full'>
       <Featured/>
       <CategoryList/>
       <div className='flex flex-row'>
