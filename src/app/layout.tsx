@@ -7,10 +7,10 @@ import Footer from "@/components/footer/Footer";
 import {
   ThemeContext,
   ThemeContextProvider,
-  useTheme,
 } from "@/contexts/ThemeContext";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import React from "react";
+import AuthProvider from "@/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
+        <AuthProvider>
         <ThemeContextProvider>
           <ThemeProvider>
             <div className="max-w-full">
@@ -37,6 +38,7 @@ export default function RootLayout({
             </div>
           </ThemeProvider>
         </ThemeContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

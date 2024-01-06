@@ -1,14 +1,15 @@
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
 
 const Auth = (props: Props) => {
-  const status : string = "not-authenticated"
+  const {status} = useSession()
   return (
     <div>
         {
-            status === "not-authenticated" ? (
+            status === "unauthenticated" ? (
                 <Link href="/login">
                     Login
                 </Link>
@@ -21,7 +22,7 @@ const Auth = (props: Props) => {
                 </Link>
                     </div>
                 
-                <div>Logout</div>
+                <div onClick={()=>signOut()}>Logout</div>
                 </div>
             )
         }
