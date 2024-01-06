@@ -1,5 +1,6 @@
 "use client";
 import { external, image, plus, video } from "@/assets";
+import { ThemeContext } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import React from "react";
 import ReactQuill from "react-quill";
@@ -10,6 +11,7 @@ type Props = {};
 const WritePost = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("")
+  const {theme} = React.useContext(ThemeContext)
   return (
     <div className="w-full px-8">
         <div className="flex flex-row text-[3.5rem] font-bold p-7">
@@ -45,7 +47,7 @@ const WritePost = (props: Props) => {
       <div className="p-3">
       <ReactQuill theme="bubble" value={value} onChange={setValue} placeholder="Tell your story..." style={{backgroundColor:"transparent"}}/>
       </div>
-      <button className="absolute top-9 right-8 max-w-[120px] w-full py-2 bg-[#1a8917] rounded-xl" >
+      <button className={`absolute top-9 right-8 max-w-[120px] w-full py-2 bg-[#1a8917] rounded-full ${theme==="light" && "text-black"}`} >
         Publish
       </button>
     </div>

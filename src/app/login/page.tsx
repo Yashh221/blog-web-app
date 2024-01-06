@@ -1,11 +1,19 @@
 "use client"
 import { ThemeContext } from '@/contexts/ThemeContext'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 type Props = {}
 
 const Login = (props: Props) => {
-  const {theme} = React.useContext(ThemeContext)
+  const router = useRouter()
+  const {theme } = React.useContext(ThemeContext)
+  const { data, status } = useSession()
+  if(status === "authenticated")
+  {
+    router.push("/")
+  }
   return (
     <div className='w-full h-full flex flex-row justify-center items-center'>
         <div className="flex flex-col items-center justify-center space-y-6 bg-darkSoftBlack rounded-xl p-16 max-w-[600px] w-full">
@@ -18,8 +26,7 @@ const Login = (props: Props) => {
             <div className='font-semibold text-base'>
                 or
             </div>
-            <button className={`max-w-[250px] w-full py-3 bg-[#dc143c] rounded-xl ${theme === "light" && "text-black"}`}>Sign up with Google</button>
-            <button className={`max-w-[250px] w-full py-3 bg-[#306fd7] rounded-xl ${theme === "light" && "text-black"}`}>Sign up with Facebook</button>
+            <div className={`text-center cursor-pointer max-w-[250px] w-full py-3 bg-[#dc143c] rounded-xl ${theme === "light" && "text-black"}`} onClick={()=>signIn("google")}>Sign up with Google</div>
         </div>
     </div>
   )
