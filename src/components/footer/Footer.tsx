@@ -1,4 +1,4 @@
-import { facebook, google, instagram, logo, x } from "@/assets";
+import { facebook, google, instagram, logo, x } from "../../../public";
 import Image from "next/image";
 import React from "react";
 

@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from './themetoggle.module.css';
 import Image from 'next/image';
-import { moon, sun } from '@/assets';
+import { moon, sun } from '../../../public';
 import { ThemeContext } from '@/contexts/ThemeContext';
 
 type Props = {}

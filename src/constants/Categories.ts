@@ -1,4 +1,4 @@
-import { coding, culture, fashion, food, style, travel } from "@/assets";
+import { coding, culture, fashion, food, style, travel } from "../../public";
 
 export const Categories = [
   {

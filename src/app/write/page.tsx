@@ -1,5 +1,5 @@
 "use client";
-import { external, image, plus, video } from "@/assets";
+import { external, image, plus, video } from "../../../public";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import React from "react";

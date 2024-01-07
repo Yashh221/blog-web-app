@@ -1,5 +1,5 @@
 "use client"
-import { image1 } from '@/assets'
+import { image1 } from '../../../public'
 import { ThemeContext } from '@/contexts/ThemeContext'
 import Image from 'next/image'
 import React from 'react'

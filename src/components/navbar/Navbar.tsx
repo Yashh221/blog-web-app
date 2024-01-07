@@ -1,5 +1,5 @@
 "use client"
-import { facebook, google, instagram, x } from '@/assets'
+import { facebook, google, instagram, x } from '../../../public'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'

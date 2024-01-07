@@ -1,4 +1,4 @@
-import { image1 } from '@/assets'
+import { image1 } from '../../../public'
 import Comments from '@/components/comments/Comments'
 import Menu from '@/components/menu/Menu'
 import Image from 'next/image'
