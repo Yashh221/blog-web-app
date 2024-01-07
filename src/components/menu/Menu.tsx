@@ -1,4 +1,4 @@
-import { image1 } from "@/assets";
+import { image1 } from "../../../public";
 import { Categories } from "@/constants/Categories";
 import Image from "next/image";
 import React from "react";
@@ -7,7 +7,7 @@ type Props = {};
 const Menu = (props: Props) => {
   return (
     <div className="mt-10">
-      <div className="text-lg">What's Hot</div>
+      <div className="text-lg">What&apos;s Hot</div>
       <div className="text-2xl font-semibold">Most Popular</div>
       <div className="flex flex-col space-y-8 mt-6">
         <div className="flex flex-col space-y-1">
@@ -77,7 +77,7 @@ const Menu = (props: Props) => {
         </div>
         <div className="flex flex-col mt-12">
           <div className="text-lg">Choosen by Editor</div>
-          <div className="text-2xl font-semibold">Editor's Pick</div>
+          <div className="text-2xl font-semibold">Editor&apos;s Pick</div>
           <div className="mt-6 flex flex-col space-y-6">
             <div className="flex flex-row gap-4 items-center">
               <Image
