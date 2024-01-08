@@ -35,7 +35,7 @@ const CategoryList = () => {
               style[category.slug]
             } max-w-[150px] w-full rounded-xl py-3 gap-x-3 flex flex-row justify-center items-center cursor-pointer`}
             onClick={() => {
-              router.push(`blogs?category=${category.title}`);
+              router.push(`blogs?category=${category.slug}`);
             }}
           >
             <div className="w-[40px] h-[40px] rounded-full overflow-hidden">
