@@ -9,24 +9,28 @@ type Props = {};
 
 const getComments = async (url: string) => {
   const res = await fetch(url);
-
   const data = await res.json();
-  // console.log(data)
-
   if (!res.ok) {
     const error = new Error("Failed to fetch comments");
     return error;
   }
-  return data;
+  return data.data;
 };
 
 const Comments = ({ postSlug }: { postSlug: string }) => {
   const status = useSession();
-  const { data, isLoading } = useSWR(
+  const { data = [], isLoading } = useSWR(
     `http://localhost:3002/api/comments?postSlug=${postSlug}`,
     getComments
     );
     console.log(data)
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (!Array.isArray(data)) {
+      return <div>No comments available</div>;
+    }
   return (
     <div className=" flex flex-col space-y-6">
       <div className="text-2xl font-semibold">Comments</div>
@@ -43,12 +47,14 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
       <div className="flex flex-col space-y-6">
         {isLoading ? (
           "Loading.."
-        ) : data?.map((comment)=>(
-          <div className="flex flex-col space-y-4" key={comment._id}>
+        ) : data && data?.map((comment)=>(
+          <div className="flex flex-col space-y-4" key={comment.id}>
             <div className="flex flex-row space-x-4">
               <Image
                 src={comment?.user?.image}
                 alt="hero"
+                width={40}
+                height={40}
                 className="w-[40px] h-[40px] overflow-hidden rounded-full"
               />
               <div className="flex flex-col">
