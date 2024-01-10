@@ -3,7 +3,7 @@ import { external, image, plus, video } from "../../../public";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import React from "react";
-import openai from 'openai';
+import OpenAI from 'openai';
 import dynamic from "next/dynamic";
 import {
   getStorage,
@@ -20,7 +20,8 @@ import { slugify } from "@/utils/slugify";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 type Props = {};
-
+console.log(process.env.OPENAI_KEY)
+const openai = new OpenAI( { apiKey : process.env.NEXT_PUBLIC_OPENAI_KEY,dangerouslyAllowBrowser:true } );
 const storage = getStorage(app);
 const WritePost = (props: Props) => {
   const { status } = useSession();
@@ -32,6 +33,32 @@ const WritePost = (props: Props) => {
   const [cat, setCat] = React.useState("");
   const [value, setValue] = React.useState("");
   const { theme } = React.useContext(ThemeContext);
+
+  const getAutocompleteSuggestions = async (input) => {
+    try {
+      const completion = await openai.completions.create({
+        model: 'gpt-3.5-turbo-instruct',
+        prompt: input,
+        max_tokens:15,
+        temperature:0
+    });
+    console.log(completion)
+  
+      return completion.choices[0].text;
+    } catch (error) {
+      console.error('OpenAi API error:', error);
+      return [];
+    }
+  };
+  const handleInputChange = async () => {
+    try {
+      const response = await getAutocompleteSuggestions(value);
+      console.log('Autocomplete Suggestions:', response);
+    } catch (error) {
+      console.error('Error fetching autocomplete suggestions:', error);
+    }
+  };
+  
   
   React.useEffect(() => {
     const upload = () => {
@@ -134,7 +161,10 @@ const WritePost = (props: Props) => {
         <ReactQuill
           theme="bubble"
           value={value}
-          onChange={setValue}
+          onChange={(val)=>{
+            setValue(val);
+            handleInputChange()
+          }}
           placeholder="Tell your story..."
           style={{ backgroundColor: "transparent" }}
         />
