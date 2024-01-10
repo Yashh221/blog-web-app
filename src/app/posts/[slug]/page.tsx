@@ -41,7 +41,7 @@ const SinglePage = async ({params}) => {
                 </div>
             </div>
             <div className='flex flex-1'>
-                <Image src={`/${data?.img}`} width={600} height={350} alt='hero' className='w-[600px] h-[350px]'/>
+                <Image src={data?.img} width={600} height={350} alt='hero' className='w-[600px] h-[350px]'/>
             </div>
         </div>
         <div className='flex flex-row mt-10 justify-between'>
