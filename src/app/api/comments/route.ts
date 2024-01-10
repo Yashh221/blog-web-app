@@ -10,13 +10,25 @@ export const GET = async (req: NextRequest) => {
       },
       include: { user: true },
     });
-    console.log(comments);
     return new NextResponse(
       JSON.stringify({ message: "success", data: comments }),
       { status: 200 }
     );
   } catch (error) {
     console.log(error);
+    return new NextResponse(
+      JSON.stringify({ message: "Something went wrong" }),
+      { status: 500 }
+    );
+  }
+};
+export const POST = async (req: NextRequest) => {
+  const { searchParams } = new URL(req.url);
+  const postSlug = searchParams.get("postSlug");
+  try {
+    const { desc } = req.body;
+    const newComment = await prisma?.comment?.create({});
+  } catch (error) {
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong" }),
       { status: 500 }
