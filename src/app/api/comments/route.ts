@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/connect";
+import { getAuthSession } from "@/utils/auth";
 export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const postSlug = searchParams.get("postSlug");
@@ -23,11 +24,22 @@ export const GET = async (req: NextRequest) => {
   }
 };
 export const POST = async (req: NextRequest) => {
-  const { searchParams } = new URL(req.url);
-  const postSlug = searchParams.get("postSlug");
+  const session = await getAuthSession();
+  if (!session) {
+    return new NextResponse(
+      JSON.stringify({ message: "User is not auteneticated" }),
+      { status: 401 }
+    );
+  }
   try {
-    const { desc } = req.body;
-    const newComment = await prisma?.comment?.create({});
+    const body = await req.json();
+    const newComment = await prisma?.comment?.create({
+      data: { ...body, userEmail: session && session?.user?.email },
+    });
+    return new NextResponse(
+      JSON.stringify({ message: "success", data: newComment }),
+      { status: 200 }
+    );
   } catch (error) {
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong" }),

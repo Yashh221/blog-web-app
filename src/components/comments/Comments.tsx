@@ -18,12 +18,12 @@ const getComments = async (url: string) => {
 };
 
 const Comments = ({ postSlug }: { postSlug: string }) => {
-  const status = useSession();
-  const { data = [], isLoading } = useSWR(
+  const {status} = useSession();
+  const [desc, setDesc] = React.useState("")
+  const { data = [], mutate,isLoading } = useSWR(
     `http://localhost:3002/api/comments?postSlug=${postSlug}`,
     getComments
     );
-    console.log(data)
     if (isLoading) {
       return <div>Loading...</div>;
     }
@@ -31,18 +31,38 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
     if (!Array.isArray(data)) {
       return <div>No comments available</div>;
     }
+    const handleSubmit = async() => {
+      try {
+        await fetch("/api/comments",
+        {
+          method:"POST",
+          body:JSON.stringify({desc,postSlug})
+        })
+        mutate();
+      } catch (error) {
+        console.log(error)
+      }
+    }
   return (
     <div className=" flex flex-col space-y-6">
       <div className="text-2xl font-semibold">Comments</div>
       <div className="flex flex-row items-center gap-16 ">
+        {
+          status === "authenticated" ? <>
         <div className="max-w-[600px]  w-full">
-          <textarea className="w-full h-[70px] rounded-xl p-4 text-black">
+          <textarea className="w-full h-[70px] rounded-xl p-4 text-black" onChange={(e)=>setDesc(e.target.value)}>
             Write your comment
           </textarea>
         </div>
-        <button className="max-w-[100px] w-full py-3 bg-[#dc143c] rounded-xl">
+        <button className="max-w-[100px] w-full py-3 bg-[#dc143c] rounded-xl" onClick={handleSubmit}>
           Send
         </button>
+        </>
+          :
+          <div>
+            Login to write a comment
+          </div>
+        }
       </div>
       <div className="flex flex-col space-y-6">
         {isLoading ? (

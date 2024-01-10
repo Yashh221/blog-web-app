@@ -84,7 +84,6 @@ model Comment{
   id String @id @default(cuid()) @map("_id")
   desc String
   createdAt DateTime @default(now())
-  catSlug String
   postSlug String
   post Post @relation(fields: [postSlug],references: [slug])
   userEmail String
